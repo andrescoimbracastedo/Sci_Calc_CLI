@@ -1,5 +1,5 @@
 #include "lexer.h"
-#include "math_dispatch.h" // Expected to contain FuncID and VarID enums
+#include "math_dispatch.h"
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
@@ -52,7 +52,6 @@ static Token make_identifier(const char *input, int *pos) {
 
     t.type = TOKEN_IDENTIFIER;
 
-    // 1. Compile Math Functions into IDs
     if (strcmp(buffer, "quad_pos")    == 0) { t.id = FUNC_QUAD_POS;    t.is_function = 1; t.arg_count = 3; return t; }
     if (strcmp(buffer, "quad_neg")    == 0) { t.id = FUNC_QUAD_NEG;    t.is_function = 1; t.arg_count = 3; return t; }
     if (strcmp(buffer, "sin")         == 0) { t.id = FUNC_SIN;         t.is_function = 1; t.arg_count = 1; return t; }
@@ -93,7 +92,6 @@ static Token make_identifier(const char *input, int *pos) {
     if (strcmp(buffer, "grad_to_deg") == 0) { t.id = FUNC_GRAD_TO_DEG; t.is_function = 1; t.arg_count = 1; return t; }
     if (strcmp(buffer, "mixed_fraction") == 0) { t.id = FUNC_MIXED_FRACTION; t.is_function = 1; t.arg_count = 3; return t; }
 
-    // 2. Compile Variables into IDs
     if (strcmp(buffer, "A")   == 0) { t.id = VAR_A;   t.is_function = 0; t.arg_count = 0; return t; }
     if (strcmp(buffer, "B")   == 0) { t.id = VAR_B;   t.is_function = 0; t.arg_count = 0; return t; }
     if (strcmp(buffer, "X")   == 0) { t.id = VAR_X;   t.is_function = 0; t.arg_count = 0; return t; }

@@ -25,7 +25,7 @@ ParseResult parse_expression(const char *input) {
     ParseResult result;
     result.postfix.count = 0;
     result.is_assignment = 0;
-    result.target_variable_id = -1; // Standard non-set ID flag
+    result.target_variable_id = -1;
 
     TokenArray tokens = lexer(input);
 
@@ -34,10 +34,9 @@ ParseResult parse_expression(const char *input) {
     int expect_operand = 1;
     int start = 0;
 
-    // Detect Assignment State using pure numerical IDs
     if (tokens.count >= 3 &&
         tokens.data[0].type == TOKEN_IDENTIFIER &&
-        tokens.data[0].is_function == 0 && // Guard: Ensure it's a variable literal
+        tokens.data[0].is_function == 0 &&
         tokens.data[1].type == TOKEN_OPERATOR &&
         tokens.data[1].op == '=')
     {
@@ -59,10 +58,8 @@ ParseResult parse_expression(const char *input) {
         }
         else if (t.type == TOKEN_IDENTIFIER) {
             if (t.is_function) {
-                // Functions push to the operator stack for shunting resolution
                 op_stack[op_top++] = t;
             } else {
-                // Variables are processed as standard immediate evaluation terms
                 result.postfix.data[result.postfix.count++] = t;
             }
             expect_operand = 0;
@@ -109,12 +106,10 @@ ParseResult parse_expression(const char *input) {
                 result.postfix.data[result.postfix.count++] = op_stack[--op_top];
             }
 
-            // Ensure this specific section in parser.c uses the new is_function structural design:
             if (op_top > 0) {
-                op_top--; // Discard left parenthesis
+                op_top--;
             }
 
-            // Pop any pending function evaluation bound to this structural block
             if (op_top > 0 &&
                 op_stack[op_top - 1].type == TOKEN_IDENTIFIER &&
                 op_stack[op_top - 1].is_function)

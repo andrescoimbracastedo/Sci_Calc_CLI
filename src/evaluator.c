@@ -36,7 +36,6 @@ double evaluate(TokenArray postfix) {
     for (int i = 0; i < postfix.count; i++) {
         Token t = postfix.data[i];
 
-        // Short-circuit if an error was raised by an inner calculation step
         if (state.error != NO_ERROR) return NAN;
 
         if (t.type == TOKEN_NUMBER) {
@@ -46,7 +45,7 @@ double evaluate(TokenArray postfix) {
         else if (t.type == TOKEN_OPERATOR) {
             if (t.op == '~') {
                 if (top < 0) { state.error = ERROR_STACK_UNDERFLOW; return NAN; }
-                // Evaluates unary negation: -x is mathematically equivalent to 0 - x
+
                 double a = stack[top--];
                 stack[++top] = calc_subtraction(0.0, a);
             } else {
@@ -70,13 +69,11 @@ double evaluate(TokenArray postfix) {
                     stack[++top] = fn->f1(a);
                 }
                 else if (fn->arg_count == 2) {
-                    // Remember: Right operand was pushed last, so it pops first!
                     double b = stack[top--];
                     double a = stack[top--];
                     stack[++top] = fn->f2(a, b);
                 }
                 else if (fn->arg_count == 3) {
-                    // Pulls parameters back in exact geometric reverse sequence
                     double c = stack[top--];
                     double b = stack[top--];
                     double a = stack[top--];
@@ -90,7 +87,7 @@ double evaluate(TokenArray postfix) {
     }
 
     if (top != 0) {
-        state.error = ERROR_SYNTAX; // Leftover tokens mean mismatched syntax
+        state.error = ERROR_SYNTAX;
         return NAN;
     }
 

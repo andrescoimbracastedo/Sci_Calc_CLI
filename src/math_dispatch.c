@@ -2,7 +2,6 @@
 #include "math_utils.h"
 #include <stdlib.h>
 
-// Array indexes correspond exactly to the FuncID enum values
 static const FunctionEntry table[FUNC_TOTAL_COUNT] = {
     [FUNC_QUAD_POS]    = { .id = FUNC_QUAD_POS,    .arg_count = 3, .f3 = calc_quadratic_formula_pos },
     [FUNC_QUAD_NEG]    = { .id = FUNC_QUAD_NEG,    .arg_count = 3, .f3 = calc_quadratic_formula_neg },
