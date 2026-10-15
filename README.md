@@ -2,19 +2,19 @@
 
 A scientific calculator built in C, designed to evaluate mathematical expressions from the command line while respecting operator precedence (BEDMAS).
 
-Example 1
+**Example 1**
 
 ![1](images/1.png)
 
-Example 2
+**Example 2**
 
 ![2](images/2.png)
 
-Example 3
+**Example 3**
 
 ![3](images/3.png)
 
-Example 4
+**Example 4**
 
 ![4](images/4.png)
 
