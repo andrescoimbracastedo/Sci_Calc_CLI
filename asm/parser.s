@@ -491,5 +491,5 @@
 	mov	QWORD PTR 18584[rsp], r12
 	call	"__stack_chk_fail"@PLT
 	.size	"parse_expression", .-"parse_expression"
-	.ident	"GCC: (GNU) 16.1.1 20260625"
+	.ident	"GCC: (GNU) 16.2.1 20260810"
 	.section	.note.GNU-stack,"",@progbits

@@ -171,12 +171,12 @@
 	je	.L123
 	cmp	r15d, 255
 	jg	.L55
-	movabs	rdx, -4294967296
+	movabs	rdi, -4294967296
 	movsxd	rax, r15d
 	add	r15d, 1
 	lea	rax, [rax+rax*2]
 	mov	QWORD PTR 48[rsp+rax*8], 7
-	mov	QWORD PTR 56[rsp+rax*8], rdx
+	mov	QWORD PTR 56[rsp+rax*8], rdi
 	mov	BYTE PTR 64[rsp+rax*8], bl
 	jmp	.L55
 	.p2align 4,,10
@@ -263,17 +263,17 @@
 	.p2align 4,,10
 	.p2align 3
 .L119:
-	movsxd	rsi, r14d
-	movsx	rdx, BYTE PTR 0[rbp+rsi]
-	test	BYTE PTR [rdi+rdx*2], 8
+	movsxd	rdx, r14d
+	movsx	rcx, BYTE PTR 0[rbp+rdx]
+	test	BYTE PTR [rdi+rcx*2], 8
 	jne	.L110
-	cmp	dl, 95
+	cmp	cl, 95
 	jne	.L63
 .L110:
 	lea	eax, 1[r14]
+	lea	rsi, 0[rbp+rdx]
 	cdqe
 	sub	rsi, rax
-	add	rsi, rbp
 	.p2align 5
 	.p2align 4
 	.p2align 3
@@ -531,12 +531,12 @@
 .L121:
 	cmp	r15d, 255
 	jg	.L55
-	movabs	rdi, -4294967296
+	movabs	rdx, -4294967296
 	movsxd	rax, r15d
 	add	r15d, 1
 	lea	rax, [rax+rax*2]
 	mov	QWORD PTR 48[rsp+rax*8], 3
-	mov	QWORD PTR 56[rsp+rax*8], rdi
+	mov	QWORD PTR 56[rsp+rax*8], rdx
 	mov	BYTE PTR 64[rsp+rax*8], 40
 	jmp	.L55
 .L122:
@@ -565,12 +565,12 @@
 .L123:
 	cmp	r15d, 255
 	jg	.L55
-	movabs	rdi, -4294967296
+	movabs	rdx, -4294967296
 	movsxd	rax, r15d
 	add	r15d, 1
 	lea	rax, [rax+rax*2]
 	mov	QWORD PTR 48[rsp+rax*8], 5
-	mov	QWORD PTR 56[rsp+rax*8], rdi
+	mov	QWORD PTR 56[rsp+rax*8], rdx
 	mov	BYTE PTR 64[rsp+rax*8], 44
 	jmp	.L55
 .L2:
@@ -820,5 +820,5 @@
 	mov	eax, 1
 	jmp	.L16
 	.size	"lexer", .-"lexer"
-	.ident	"GCC: (GNU) 16.1.1 20260625"
+	.ident	"GCC: (GNU) 16.2.1 20260810"
 	.section	.note.GNU-stack,"",@progbits

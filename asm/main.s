@@ -247,50 +247,53 @@
 .L40:
 	call	"__stack_chk_fail"@PLT
 	.size	"run_calculator_line", .-"run_calculator_line"
-	.section	.rodata.str1.8
-	.align 8
-.LC13:
-	.string	"===================================="
-	.align 8
-.LC14:
-	.string	"           CLI Calculator           "
-	.align 8
-.LC15:
-	.string	"  Type expressions or 'exit' to quit"
-	.align 8
-.LC16:
-	.string	"====================================\n"
 	.section	.rodata.str1.1
-.LC17:
-	.string	"calc > "
-.LC18:
+.LC13:
+	.string	"type 'exit' to quit"
+.LC14:
+	.string	"calc >> "
+.LC15:
 	.string	"\n"
-.LC19:
+.LC16:
 	.string	"exit"
-.LC20:
-	.string	"Goodbye!"
-.LC21:
+.LC17:
+	.string	"Adios!"
+.LC18:
 	.string	"quit"
+.LC19:
+	.string	"mode deg"
+.LC20:
+	.string	"Angle mode: Degrees"
+.LC21:
+	.string	"mode rad"
+.LC22:
+	.string	"Angle mode: Radians"
+.LC23:
+	.string	"mode grad"
+.LC24:
+	.string	"Angle mode: Gradians"
+.LC25:
+	.string	"mode"
 	.section	.text.startup,"ax",@progbits
 	.p2align 4
 	.globl	"main"
 	.type	"main", @function
 "main":
-	sub	rsp, 1048
+	push	r12
+	movabs	r12, 7021788157861719917
+	push	rbp
+	movabs	rbp, 7233187959999328109
+	push	rbx
+	movabs	rbx, 7450471248857165677
+	sub	rsp, 1040
 	mov	rdi, QWORD PTR fs:40
 	mov	QWORD PTR 1032[rsp], rdi
 	lea	rdi, .LC13[rip]
 	call	"puts"@PLT
-	lea	rdi, .LC14[rip]
-	call	"puts"@PLT
-	lea	rdi, .LC15[rip]
-	call	"puts"@PLT
-	lea	rdi, .LC16[rip]
-	call	"puts"@PLT
 	.p2align 4
 	.p2align 3
 .L44:
-	lea	rdi, .LC17[rip]
+	lea	rdi, .LC14[rip]
 	xor	eax, eax
 	call	"printf"@PLT
 	mov	rdx, QWORD PTR "stdin"[rip]
@@ -299,16 +302,27 @@
 	call	"fgets"@PLT
 	test	rax, rax
 	je	.L45
-	lea	rsi, .LC18[rip]
+	lea	rsi, .LC15[rip]
 	mov	rdi, rsp
 	call	"strcspn"@PLT
 	mov	BYTE PTR [rsp+rax], 0
 	cmp	DWORD PTR [rsp], 1953069157
-	je	.L60
+	je	.L76
 .L46:
 	cmp	DWORD PTR [rsp], 1953068401
-	je	.L61
-.L49:
+	je	.L77
+	cmp	QWORD PTR [rsp], rbx
+	je	.L78
+.L52:
+	cmp	QWORD PTR [rsp], rbp
+	je	.L79
+.L56:
+	cmp	QWORD PTR [rsp], r12
+	je	.L80
+.L59:
+	cmp	DWORD PTR [rsp], 1701080941
+	je	.L81
+.L62:
 	cmp	BYTE PTR [rsp], 0
 	je	.L44
 	mov	rdi, rsp
@@ -316,27 +330,81 @@
 	jmp	.L44
 	.p2align 4,,10
 	.p2align 3
-.L60:
+.L76:
 	cmp	BYTE PTR 4[rsp], 0
 	jne	.L46
 .L51:
-	lea	rdi, .LC20[rip]
+	lea	rdi, .LC17[rip]
 	call	"puts"@PLT
 .L45:
 	mov	rax, QWORD PTR 1032[rsp]
 	sub	rax, QWORD PTR fs:40
-	jne	.L62
+	jne	.L82
+	add	rsp, 1040
 	xor	eax, eax
-	add	rsp, 1048
+	pop	rbx
+	pop	rbp
+	pop	r12
 	ret
 	.p2align 4,,10
 	.p2align 3
-.L61:
+.L77:
 	cmp	BYTE PTR 4[rsp], 0
 	je	.L51
-	jmp	.L49
-.L62:
+	cmp	QWORD PTR [rsp], rbx
+	jne	.L52
+	.p2align 4
+	.p2align 3
+.L78:
+	cmp	BYTE PTR 8[rsp], 0
+	jne	.L52
+	lea	rdi, .LC20[rip]
+	mov	DWORD PTR "state"[rip+40], 0
+	call	"puts"@PLT
+	jmp	.L44
+	.p2align 4,,10
+	.p2align 3
+.L79:
+	cmp	BYTE PTR 8[rsp], 0
+	jne	.L56
+	lea	rdi, .LC22[rip]
+	mov	DWORD PTR "state"[rip+40], 1
+	call	"puts"@PLT
+	jmp	.L44
+	.p2align 4,,10
+	.p2align 3
+.L80:
+	cmp	WORD PTR 8[rsp], 100
+	jne	.L59
+	lea	rdi, .LC24[rip]
+	mov	DWORD PTR "state"[rip+40], 2
+	call	"puts"@PLT
+	jmp	.L44
+	.p2align 4,,10
+	.p2align 3
+.L81:
+	cmp	BYTE PTR 4[rsp], 0
+	jne	.L62
+	mov	eax, DWORD PTR "state"[rip+40]
+	cmp	eax, 1
+	je	.L83
+	cmp	eax, 2
+	je	.L66
+	test	eax, eax
+	jne	.L44
+	lea	rdi, .LC20[rip]
+	call	"puts"@PLT
+	jmp	.L44
+.L66:
+	lea	rdi, .LC24[rip]
+	call	"puts"@PLT
+	jmp	.L44
+.L83:
+	lea	rdi, .LC22[rip]
+	call	"puts"@PLT
+	jmp	.L44
+.L82:
 	call	"__stack_chk_fail"@PLT
 	.size	"main", .-"main"
-	.ident	"GCC: (GNU) 16.1.1 20260625"
+	.ident	"GCC: (GNU) 16.2.1 20260810"
 	.section	.note.GNU-stack,"",@progbits

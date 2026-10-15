@@ -316,5 +316,5 @@
 .LC0:
 	.long	0
 	.long	2146959360
-	.ident	"GCC: (GNU) 16.1.1 20260625"
+	.ident	"GCC: (GNU) 16.2.1 20260810"
 	.section	.note.GNU-stack,"",@progbits

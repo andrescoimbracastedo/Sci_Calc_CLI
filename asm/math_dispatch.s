@@ -136,5 +136,5 @@
 	.long	38
 	.long	3
 	.quad	"calc_mixed_fraction"
-	.ident	"GCC: (GNU) 16.1.1 20260625"
+	.ident	"GCC: (GNU) 16.2.1 20260810"
 	.section	.note.GNU-stack,"",@progbits
