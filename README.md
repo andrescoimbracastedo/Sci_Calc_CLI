@@ -2,6 +2,11 @@
 
 A scientific calculator built in C, designed to evaluate mathematical expressions from the command line while respecting operator precedence (BEDMAS).
 
+![1](images/1.png)
+![2](images/2.png)
+![3](images/3.png)
+![4](images/4.png)
+
 ## How It Works
 
 The calculator processes an expression through several stages:

@@ -74,60 +74,62 @@ double calc_quadratic_formula_neg(double a, double b, double c){
     return numerator / denominator;
 }
 
-double calc_sin(double x) {
-    if(state.angleMode == MODE_DEG){
-        return sin(  calc_deg_to_rad(x) );
+static double angle_to_radians(double angle)
+{
+    switch (state.angleMode) {
+        case MODE_DEG:
+            return calc_deg_to_rad(angle);
+
+        case MODE_GRAD:
+            return angle * M_PI / 200.0;
+
+        case MODE_RAD:
+        default:
+            return angle;
     }
+}
+
+static double radians_to_angle(double angle)
+{
+    switch (state.angleMode) {
+        case MODE_DEG:
+            return calc_rad_to_deg(angle);
+
+        case MODE_GRAD:
+            return angle * 200.0 / M_PI;
+
+        case MODE_RAD:
+        default:
+            return angle;
+    }
+}
 
 
-    return sin(x);
+
+double calc_sin(double x) {
+    return sin(angle_to_radians(x));
 
 }
 
 double calc_cos(double x) {
-    if(state.angleMode == MODE_DEG)
-    {
-        return cos(calc_deg_to_rad(x));
-    }
-
-    return cos(x);
+    return cos(angle_to_radians(x));
 
 }
 
 double calc_tan(double x) {
-    if(state.angleMode == MODE_DEG)
-    {
-        return tan( calc_deg_to_rad(x) );
-    }
-
-    return tan(x);
+    return tan(angle_to_radians(x));
 }
 
 double calc_asin(double x) {
-    double result = asin(x);
-
-    if (state.angleMode == MODE_DEG) {
-        return result * 180 / M_PI;
-    }
-    return result;
+    return radians_to_angle(asin(x));
 }
 
 double calc_acos(double x) {
-    double result = acos(x);
-
-    if (state.angleMode == MODE_DEG) {
-        return result * 180 / M_PI;
-    }
-    return result;
+    return radians_to_angle(acos(x));
 }
 
 double calc_atan(double x) {
-    double result = atan(x);
-
-    if (state.angleMode == MODE_DEG) {
-        return result * 180 / M_PI;
-    }
-    return result;
+    return radians_to_angle(atan(x));
 }
 
 double calc_sinh(double x) {

@@ -19,14 +19,13 @@ typedef enum {
     SCIENTIFIC
 } PrecisionMode;
 
-// Clear, explicit error tracking definitions
 typedef enum {
     NO_ERROR = 0,
     ERROR_DIV_BY_ZERO,
-    ERROR_DOMAIN,          // Negative sqrt, ln(0), etc.
-    ERROR_OVERFLOW,        // Numbers too large (e.g. huge factorials)
+    ERROR_DOMAIN,
+    ERROR_OVERFLOW,
     ERROR_UNDERFLOW,
-    ERROR_SYNTAX,          // Mismatched parentheses
+    ERROR_SYNTAX,
     ERROR_UNKNOWN_TOKEN,
     ERROR_STACK_OVERFLOW,
     ERROR_STACK_UNDERFLOW

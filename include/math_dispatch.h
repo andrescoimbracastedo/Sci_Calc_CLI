@@ -1,7 +1,6 @@
 #ifndef MATH_DISPATCH_H
 #define MATH_DISPATCH_H
 
-// Numeric IDs for all explicit mathematical functions
 typedef enum {
     FUNC_QUAD_POS,
     FUNC_QUAD_NEG,
@@ -42,7 +41,7 @@ typedef enum {
     FUNC_DEG_TO_GRAD,
     FUNC_GRAD_TO_DEG,
     FUNC_MIXED_FRACTION,
-    FUNC_TOTAL_COUNT // Keeps track of table size dynamically
+    FUNC_TOTAL_COUNT
 } FuncID;
 
 typedef enum {
@@ -53,7 +52,7 @@ typedef enum {
     VAR_ANS
 } VarID;
 
-// Function pointer signature types
+
 typedef double (*Func0)(void);
 typedef double (*Func1)(double);
 typedef double (*Func2)(double, double);
@@ -72,4 +71,4 @@ typedef struct {
 
 const FunctionEntry* find_function_by_id(int func_id);
 
-#endif // MATH_DISPATCH_H
+#endif

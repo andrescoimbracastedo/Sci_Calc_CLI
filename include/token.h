@@ -17,8 +17,8 @@ typedef enum {
 typedef struct {
     TokenType type;
     int arg_count;
-    int is_function; // 1 if it's a function, 0 if it's a variable
-    int id;          // Stores numeric ID (FuncID or VarID enum values)
+    int is_function;
+    int id;
 
     union {
         double number;
@@ -34,7 +34,7 @@ typedef struct {
 typedef struct {
     TokenArray postfix;
     int is_assignment;
-    int target_variable_id; // Clean replacement for char variable[]
+    int target_variable_id;
 } ParseResult;
 
-#endif // TOKEN_H
+#endif

@@ -20,6 +20,47 @@ void print_calculator_error(CalcError err) {
     }
 }
 
+static int handle_mode_command(const char *input)
+{
+    if (strcmp(input, "mode deg") == 0) {
+        state.angleMode = MODE_DEG;
+        printf("Angle mode: Degrees\n");
+        return 1;
+    }
+
+    if (strcmp(input, "mode rad") == 0) {
+        state.angleMode = MODE_RAD;
+        printf("Angle mode: Radians\n");
+        return 1;
+    }
+
+    if (strcmp(input, "mode grad") == 0) {
+        state.angleMode = MODE_GRAD;
+        printf("Angle mode: Gradians\n");
+        return 1;
+    }
+
+    if (strcmp(input, "mode") == 0) {
+        switch (state.angleMode) {
+            case MODE_DEG:
+                printf("Angle mode: Degrees\n");
+                break;
+
+            case MODE_RAD:
+                printf("Angle mode: Radians\n");
+                break;
+
+            case MODE_GRAD:
+                printf("Angle mode: Gradians\n");
+                break;
+        }
+
+        return 1;
+    }
+
+    return 0;
+}
+
 void run_calculator_line(const char *input_expression) {
 
     state.error = NO_ERROR;
@@ -80,6 +121,10 @@ int main(void) {
         if (strcmp(input_buffer, "exit") == 0 || strcmp(input_buffer, "quit") == 0) {
             printf("Adios!\n");
             break;
+        }
+
+        if (handle_mode_command(input_buffer)) {
+            continue;
         }
 
 
