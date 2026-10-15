@@ -21,7 +21,7 @@ This project pushed me beyond basic C programming exercises and into designing a
 - **Tokenization and parsing:** Moving from string comparisons to a structured representation of mathematical expressions.
 - **Stacks and queues:** Applying these data structures to expression conversion and evaluation.
 - **Function pointers and dispatch tables:** Connecting tokens and operations to their corresponding handlers.
-- **State machines and error handling:** Organizing program flow and handling failures without relying entirely on ad hoc checks.
+- **State machines and error handling:** Organizing program flow and handling failures.
 - **C data modeling:** Using `struct`, `typedef`, and `union` to organize data and represent different token types.
 - **Conditional compilation:** Using preprocessor directives to control which code is compiled.
 - **Input edge cases:** Handling less obvious numeric inputs such as `.5` and `-4`, alongside the challenges of distinguishing unary and binary operators.
@@ -44,5 +44,4 @@ This CLI calculator is the first stage of a larger project: adapting the math en
 - `src/` — C source code for the calculator and expression-processing engine.
 - `asm/` — Assembly output generated for exploration and learning.
 
-*Directory names may need to be adjusted to match the repository.*
 
