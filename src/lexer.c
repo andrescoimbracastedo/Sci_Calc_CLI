@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include "state.h"
 
 static void push(TokenArray *t, Token tok) {
     if (t->count < MAX_TOKENS) {
@@ -98,8 +99,16 @@ static Token make_identifier(const char *input, int *pos) {
     if (strcmp(buffer, "Y")   == 0) { t.id = VAR_Y;   t.is_function = 0; t.arg_count = 0; return t; }
     if (strcmp(buffer, "ANS") == 0) { t.id = VAR_ANS; t.is_function = 0; t.arg_count = 0; return t; }
 
-    fprintf(stderr, "Lexer Error: Unknown identifier '%s'\n", buffer);
-    exit(1);
+    state.error = ERROR_UNKNOWN_TOKEN;
+
+    t.type = TOKEN_INVALID;
+    t.id = -1;
+    t.is_function = 0;
+    t.arg_count = 0;
+    t.op = '\0';
+    t.number = 0.0;
+
+    return t;
 }
 
 TokenArray lexer(const char *input) {

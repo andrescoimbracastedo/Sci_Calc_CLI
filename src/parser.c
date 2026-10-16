@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "lexer.h"
+#include "state.h"
 
 static int precedence(char op) {
     switch (op) {
@@ -28,6 +29,10 @@ ParseResult parse_expression(const char *input) {
     result.target_variable_id = -1;
 
     TokenArray tokens = lexer(input);
+
+    if (state.error != NO_ERROR) {
+        return result;
+    }
 
     int op_top = 0;
     Token op_stack[MAX_TOKENS];
